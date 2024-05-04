@@ -7,19 +7,6 @@ export default class App extends Component {
   articles = [
       {
            "source": {
-       "id": "usa-today",
-       "name": "USA Today"
-       },
-       "author": "USA TODAY",
-       "title": "Roman art showing Helen of Troy discovered in Pompeii 2000 years after volcanic eruption - USA TODAY",
-       "description": null,
-       "url": "https://www.usatoday.com/story/news/world/2024/04/11/pompeii-discovery-roman-frescoes-paintings/73296713007/",
-       "urlToImage": null,
-       "publishedAt": "2024-04-13T12:21:00Z",
-       "content": null
-       },
-      {
-           "source": {
        "id": "al-jazeera-english",
        "name": "Al Jazeera English"
        },
@@ -59,19 +46,6 @@ export default class App extends Component {
        },
       {
            "source": {
-       "id": "politico",
-       "name": "Politico"
-       },
-       "author": "POLITICO",
-       "title": "The New Civil War Movie Is Eerily Right About How the Country Could Split Apart - POLITICO",
-       "description": null,
-       "url": "https://www.politico.com/news/magazine/2024/04/13/yes-the-new-civil-war-movie-is-terrifying-but-how-real-is-it-00152064",
-       "urlToImage": null,
-       "publishedAt": "2024-04-13T11:00:00Z",
-       "content": null
-       },
-      {
-           "source": {
        "id": null,
        "name": "CNBC"
        },
@@ -95,19 +69,6 @@ export default class App extends Component {
        "urlToImage": "https://www.rollingstone.com/wp-content/uploads/2024/01/GettyImages-1812179956.jpg?w=1600&h=900&crop=1",
        "publishedAt": "2024-04-13T09:18:49Z",
        "content": "Lana Del Rey brought her ethereal Venus energy to the Coachella main stage as she closed out Friday night at the festival. This marked her first Coachella performance since 2014.\r\nSeated on the back … [+3559 chars]"
-       },
-      {
-           "source": {
-       "id": "axios",
-       "name": "Axios"
-       },
-       "author": "Axios",
-       "title": "Trump says he stands with Johnson as Greene threatens ouster - Axios",
-       "description": null,
-       "url": "https://www.axios.com/2024/04/12/trump-mike-johnson-marjorie-taylor-greene-mar-a-lago",
-       "urlToImage": null,
-       "publishedAt": "2024-04-13T08:34:53Z",
-       "content": null
        },
       {
            "source": {
@@ -281,13 +242,12 @@ export default class App extends Component {
           <div className="row">
             {this.state.articles.map((element)=>{
               return(            
-              <div className="col-md-4">
+              <div className="col-md-4" key={element.url}>
               <NewsItem
-                key={element.url}
-                title={element.title}
-                description={element.description}
-                imageUrl="https://hips.hearstapps.com/hmg-prod/images/index-anime-1674137684.jpg?crop=0.6666666666666666xw:1xh;center,top&resize=1200:*"
-                newsUrl="TOdo"
+                title={element.title.slice(0,40)}
+                description={element.description.slice(0,80)}
+                imageUrl={element.urlToImage}
+                newsUrl={element.url}
                 />
             </div>)
             })}
