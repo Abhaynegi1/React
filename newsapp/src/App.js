@@ -279,20 +279,18 @@ export default class App extends Component {
         <div className="container my-3">
           <h2>Top-Headlines</h2>
           <div className="row">
-            <div className="col-md-4">
+            {this.state.articles.map((element)=>{
+              return(            
+              <div className="col-md-4">
               <NewsItem
-                title="My title"
-                description="My desc"
+                key={element.url}
+                title={element.title}
+                description={element.description}
                 imageUrl="https://hips.hearstapps.com/hmg-prod/images/index-anime-1674137684.jpg?crop=0.6666666666666666xw:1xh;center,top&resize=1200:*"
                 newsUrl="TOdo"
                 />
-            </div>
-            <div className="col-md-4">
-              <NewsItem title="My title" description="My desc" />
-            </div>
-            <div className="col-md-4">
-              <NewsItem title="My title" description="My desc" />
-            </div>
+            </div>)
+            })}
           </div>
         </div>
       </div>
