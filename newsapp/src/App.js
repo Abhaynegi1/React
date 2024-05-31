@@ -232,6 +232,14 @@ export default class App extends Component {
     this.state ={
       articles : this.articles
     }
+    console.log("inside constructor")
+  }
+  async componentDidMount(){
+    let url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=53ff8004edd84e1dbc0f876111e5bbb1";
+    let data = await fetch(url);
+    let parseData = await data.json();
+    console.log(parseData);
+    this.setState({articles : parseData.articles});
   }
   render() {
     return (
@@ -244,8 +252,8 @@ export default class App extends Component {
               return(            
               <div className="col-md-4" key={element.url}>
               <NewsItem
-                title={element.title.slice(0,40)}
-                description={element.description.slice(0,80)}
+                title={element.title?element.title.slice(0,40):""}
+                description={element.description?element.description.slice(0,80):""}
                 imageUrl={element.urlToImage}
                 newsUrl={element.url}
                 />
