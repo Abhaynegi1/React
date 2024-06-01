@@ -237,11 +237,31 @@ export default class App extends Component {
 
   }
   async componentDidMount(){
-    let url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=53ff8004edd84e1dbc0f876111e5bbb1";
+    let url = "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=53ff8004edd84e1dbc0f876111e5bbb1&page=1&pageSize=18";
     let data = await fetch(url);
     let parseData = await data.json();
     console.log(parseData);
     this.setState({articles : parseData.articles});
+  }
+  previousHandle = async()=>{
+    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=53ff8004edd84e1dbc0f876111e5bbb1&page=${this.state.page -1}&pageSize=18`;
+    let data = await fetch(url);
+    let parseData = await data.json();
+    console.log(parseData);
+    this.setState({
+      page : this.state.page -1,
+      articles : parseData.articles,
+    })
+  }
+  nextHandle = async()=>{
+    let url = `https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=53ff8004edd84e1dbc0f876111e5bbb1&page=${this.state.page +1}&pageSize=18`;
+    let data = await fetch(url);
+    let parseData = await data.json();
+    console.log(parseData);
+    this.setState({
+      page : this.state.page +1,
+      articles : parseData.articles,
+    })
   }
   render() {
     return (
@@ -263,8 +283,8 @@ export default class App extends Component {
             })}
           </div>
           <div className="container d-flex justify-content-between">
-          <button type="button" class="btn btn-dark">&larr; Previous</button>
-          <button type="button" class="btn btn-dark">Next &rarr;</button>
+          <button disabled={this.state.page <=1} type="button" class="btn btn-dark" onClick={this.previousHandle}>&larr; Previous</button>
+          <button type="button" class="btn btn-dark" onClick={this.nextHandle}>Next &rarr;</button>
           </div>
         </div>
       </div>
